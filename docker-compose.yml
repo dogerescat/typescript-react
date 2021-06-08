@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  ui:
+    build: .
+    environment:
+      - TZ=Asia/Tokyo
+    container_name: ui
+    volumes:
+      - ./react_app:/app
+    tty: true
+    working_dir: /app
+    command: yarn start
+    ports:
+      - 3000:3000

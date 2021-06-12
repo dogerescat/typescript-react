@@ -1,0 +1,46 @@
+#form {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 200px;
+  text-align: left;
+}
+
+.name {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.email {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.password {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.form-name {
+  padding: 5px;
+  margin: 5px;
+  margin-left: 10px;
+  width: 60%;
+  height: 25px;
+}
+
+.form-email {
+  padding: 5px;
+  margin: 5px;
+  margin-left: 10px;
+  width: 60%;
+  height: 25px;
+}
+
+.form-password {
+  padding: 5px;
+  margin: 5px;
+  margin-left: 20px;
+  width: 60%;
+  height: 25px;
+}
+/*# sourceMappingURL=register_form.css.map */

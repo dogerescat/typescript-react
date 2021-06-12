@@ -1,0 +1,31 @@
+.header {
+    position: relative;
+    background-color: #def7ff;
+    height: 50px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 20px; 
+}
+
+.header_wrapper {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.nav_wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.nav_item {
+    display: block;
+    float: right;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}

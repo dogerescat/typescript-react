@@ -5,4 +5,5 @@ RUN npm install -g npm \
  && apk add git \
  && npm install -g create-react-app 
  
+ENV CI=true
 # CMD [ "yarn", "install" ]

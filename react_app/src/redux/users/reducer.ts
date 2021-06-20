@@ -1,6 +1,7 @@
 import initialState from '../store/initialState';
 import * as Actions from './action';
 import { UserAction } from '../../types/redux/user';
+
 export const UsersReducer = (
   state = initialState.users,
   action: UserAction

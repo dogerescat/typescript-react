@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Login = () => {
   return (
@@ -15,6 +14,7 @@ const Login = () => {
           <input type="password" name="password" className="form-password" />
         </label>
       </div>
+      {/* <button onClick={login}>login</button> */}
     </div>
   );
 }

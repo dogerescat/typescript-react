@@ -2,12 +2,13 @@
 import './App.css';
 import './styles/form.css';
 import './styles/header.css';
-import Main from './components/Main';
-
+import FormHeader from './components/Header';
+import Router from './Router';
 function App() {
   return (
     <div className="App">
-      <Main />
+      <FormHeader/>
+      <Router/>
     </div>
   );
 }

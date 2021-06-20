@@ -1,6 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 function FormHeader() {
   
   return (
@@ -10,10 +7,10 @@ function FormHeader() {
             <nav className="nav">
               <ul className="nav_wrapper">
                 <li className="nav_item">  
-                  <Link to="/login">login</Link>  
+                  <a href="/login">login</a>  
                 </li>
                 <li className="nav_item">
-                  <Link to="/">logout</Link>
+                  <a href="/">logout</a>
                 </li>
               </ul>
             </nav>

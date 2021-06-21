@@ -1,7 +1,8 @@
 const initialState = {
     users: {
-        id: 0,
-        name: '',
+        id: 1,
+        name: 'shuto',
+        isSignedIn: false
     }
 }
 export default initialState;

@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,7 +9,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
 
 const history = History.createBrowserHistory();
-const store = createStore(history);
+export const store = createStore(history);
 
 ReactDOM.render(
   <Provider store={store}>

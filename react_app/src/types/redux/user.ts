@@ -1,7 +1,11 @@
+export interface State {
+    users: UserState;
+}
+
 export interface UserState {
     name: string;
     id : number;
-    
+    isSignedIn: boolean;
 }
 export interface UserAction {
     type: string;

@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import './App.css';
 import './styles/form.css';
 import './styles/header.css';

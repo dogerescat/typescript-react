@@ -1,8 +1,6 @@
 import React from 'react';
-import './App.css';
-import './styles/form.css';
 import './styles/header.css';
-import FormHeader from './components/Header';
+import FormHeader from './templates/Header';
 import Router from './Router';
 function App() {
   return (

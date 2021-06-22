@@ -4,14 +4,14 @@ export interface State {
 
 export interface UserState {
     name: string;
-    id : number;
+    uid : string;
     isSignedIn: boolean;
 }
 export interface UserAction {
     type: string;
     payload: {
         isSignedIn: boolean;
-        id: number;
+        uid: string;
         name: string;
         email: string;
     }

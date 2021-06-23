@@ -25,13 +25,13 @@ export const signUpAction = (userState: UserState) => {
     }
 }
 export const SIGN_OUT = 'SIGN_OUT';
-export const signOutAction = (userState: UserState) => {
+export const signOutAction = () => {
     return {
         type: 'SIGN_OUT',
         payload: {
             isSignedIn: false,
-            uid: userState.uid,
-            name: userState.name
+            uid: '',
+            name: ''
         }
     }
 }

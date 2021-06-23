@@ -1,6 +1,28 @@
-import { signInAction } from "./action";
+import { signInAction, signOutAction } from "./action";
 import { push } from "connected-react-router";
 import { auth, FirebaseTimestamp, db } from "../../firebase";
+
+export const listenAuthState = () => {
+    return async (dispatch: any) => {
+        return auth.onAuthStateChanged(user => {
+            if(!user) {
+                dispatch(push('/login'));
+                return;
+            }
+            const uid = user.uid;
+            db.collection('users').doc(uid).get()
+                .then((snapshot) => {
+                    const data = snapshot.data();
+                    dispatch(signInAction({
+                        isSignedIn: true,
+                        name: data!.username,
+                        uid: uid
+                    }));
+                    dispatch(push('/home'));
+                });
+        })
+    }
+}
 
 export const signIn = (email: string, password: string) => {
     return async (dispatch: any) => {
@@ -20,7 +42,7 @@ export const signIn = (email: string, password: string) => {
                     const data = snapshot.data();
                     dispatch(signInAction({
                         isSignedIn: true,
-                        name: data?.username,
+                        name: data!.username,
                         uid: uid
                     }))
                 })
@@ -31,7 +53,6 @@ export const signIn = (email: string, password: string) => {
 
 export const signUp = (name: string, email: string, password: string, confirm: string) => {
     return async (dispatch: any) => {
-        //validation
         if(name === "" || email === "" || password === "" || confirm === "") {
             alert('必須入力です');
             return false;
@@ -58,5 +79,15 @@ export const signUp = (name: string, email: string, password: string, confirm: s
                     })
                 }
             })
+    }
+}
+
+export const signOut = () => {
+    return async (disptch: any) => {
+        auth.signOut()
+          .then(() => {
+              disptch(signOutAction());
+              disptch(push('/'));
+          })
     }
 }

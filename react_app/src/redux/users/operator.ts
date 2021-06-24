@@ -51,9 +51,9 @@ export const signIn = (email: string, password: string) => {
     }
 }
 
-export const signUp = (name: string, email: string, password: string, confirm: string) => {
+export const signUp = (email: string, password: string, username: string, confirm: string) => {
     return async (dispatch: any) => {
-        if(name === "" || email === "" || password === "" || confirm === "") {
+        if(username === "" || email === "" || password === "" || confirm === "") {
             alert('必須入力です');
             return false;
         }
@@ -71,7 +71,7 @@ export const signUp = (name: string, email: string, password: string, confirm: s
                         createAt: timestamp,
                         email: email,
                         updatedAt: timestamp,
-                        username: name
+                        userrname: username
                     }
                     db.collection('users').doc(uid).set(userInitialData)
                     .then(() => {

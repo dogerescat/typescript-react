@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-function FormHeader() {
+// import { Link } from 'react-router-dom';
+const FormHeader = () => {
   return (
     <header className='header'>
       <div className="header_wrapper">
         <div className="title">React App</div>
-            <nav className="nav">
+            {/* <nav className="nav">
               <ul className="nav_wrapper">
                 <li className="nav_item">  
                   <Link to="/login">login</Link>  
@@ -14,7 +14,7 @@ function FormHeader() {
                   <Link to="/">logout</Link>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
   
       </div>
     </header>

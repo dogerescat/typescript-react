@@ -1,7 +1,7 @@
 const initialState = {
     users: {
-        id: 1,
-        name: 'shuto',
+        uid: '',
+        name: '',
         isSignedIn: false
     }
 }

@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router';
 import { SignUp, Login, Home } from './templates'
 import Auth from './Auth';
 
-const Router = () => {
+const Router: React.FC = () => {
     return (
         <Switch>
             <Route exact path="(/)?" component={SignUp}/>

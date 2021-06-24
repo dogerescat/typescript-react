@@ -28,23 +28,27 @@ const SignUp = () => {
 
     return (
         <>
-            <TextInput
-                fullWidth={true} label={"ユーザー名"} multiline={false} required={true} rows={1} value={username} type={'text'} onChange={inputUsername}
-            />
-            <TextInput
-                fullWidth={true} label={"Eメール"} multiline={false} required={true} rows={1} value={email} type={'email'} onChange={inputEmail}
-            />
-            <TextInput
-                fullWidth={true} label={"パスワード"} multiline={false} required={true} rows={1} value={password} type={'password'} onChange={inputPassword}
-            />
-            <TextInput
-                fullWidth={true} label={"確認用パスワード"} multiline={false} required={true} rows={1} value={confirmPassword} type={'password'} onChange={inputConfirmPassword}
-            />
-            <div>
-                <PrimaryButton
-                    label={"登録"}
-                    onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
-                />
+            <div className="form">
+                <div className="form-input">
+                    <TextInput
+                        fullWidth={true} label={"ユーザー名"} multiline={false} required={true} rows={1} value={username} type={'text'} onChange={inputUsername}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"Eメール"} multiline={false} required={true} rows={1} value={email} type={'email'} onChange={inputEmail}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"パスワード"} multiline={false} required={true} rows={1} value={password} type={'password'} onChange={inputPassword}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"確認用パスワード"} multiline={false} required={true} rows={1} value={confirmPassword} type={'password'} onChange={inputConfirmPassword}
+                    />
+                    <div className="form-button">
+                        <PrimaryButton
+                            label={"登録"}
+                            onClick={() => dispatch(signUp(email, password, username, confirmPassword))}
+                        />
+                    </div>
+                </div>
             </div>
         </>
     ) 

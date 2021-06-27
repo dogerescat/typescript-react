@@ -3,8 +3,8 @@ export interface State {
 }
 
 export interface UserState {
-    name: string;
     uid : string;
+    name: string;
     isSignedIn: boolean;
 }
 export interface UserAction {

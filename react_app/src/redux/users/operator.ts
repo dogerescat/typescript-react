@@ -15,10 +15,10 @@ export const listenAuthState = () => {
                     const data = snapshot.data();
                     dispatch(signInAction({
                         isSignedIn: true,
-                        name: data!.username,
+                        name: data?.username,
                         uid: uid
                     }));
-                    dispatch(push('/home'));
+                    // dispatch(push('/home'));
                 });
         })
     }
@@ -30,7 +30,6 @@ export const signIn = (email: string, password: string) => {
                 alert("必須入力です");
                 return false;
             }
-            dispatch(push('/home'));
         
         auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
@@ -42,10 +41,11 @@ export const signIn = (email: string, password: string) => {
                     const data = snapshot.data();
                     dispatch(signInAction({
                         isSignedIn: true,
-                        name: data!.username,
+                        name: data?.username,
                         uid: uid
                     }))
                 })
+                dispatch(push('/home'));
             }
         })
     }
@@ -71,7 +71,7 @@ export const signUp = (email: string, password: string, username: string, confir
                         createAt: timestamp,
                         email: email,
                         updatedAt: timestamp,
-                        userrname: username
+                        username: username
                     }
                     db.collection('users').doc(uid).set(userInitialData)
                     .then(() => {

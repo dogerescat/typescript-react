@@ -5,7 +5,6 @@ import { getIsSignedIn } from '../redux/users/selectors';
 import { Dropdown } from '../components/Ukit'
 
 const FormHeader = () => {
-  // const dispatch = useDispatch();
   const selector = useSelector((state: State) => state);
   const isSignedIn = getIsSignedIn(selector);
   let Button: any;

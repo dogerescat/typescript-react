@@ -5,12 +5,27 @@ import './styles/button.css';
 import './styles/index.css';
 import FormHeader from './templates/Header';
 import Router from './Router';
+import { BottomNavi } from './components/Ukit';
+import {useSelector} from 'react-redux';
+import {State} from './types/redux/user';
+import {getIsSignedIn} from './redux/users/selectors';
 function App() {
+  const selector = useSelector((state: State) => state);
+  const isSignedIn = getIsSignedIn(selector);
+  let Bottom: any;
+  if(isSignedIn) {
+    Bottom = <BottomNavi/>;
+  } 
   return (
-    <div className="App">
-      <FormHeader/>
-      <Router/>
-    </div>
+    <>
+      <FormHeader />
+      <div className='App'>
+        <Router />
+      </div>
+      <div className='bottom-navi'>
+        {Bottom}
+      </div>
+    </>
   );
 }
 

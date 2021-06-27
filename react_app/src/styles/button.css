@@ -1,5 +1,6 @@
-.signout-button {
-  margin: 50px;
-  text-align: center;
+.bottom-navi {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
 }
 /*# sourceMappingURL=button.css.map */

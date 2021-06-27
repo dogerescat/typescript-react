@@ -2,7 +2,8 @@ const initialState = {
     users: {
         uid: '',
         name: '',
-        isSignedIn: false
+        isSignedIn: false,
+        screen: ''
     }
 }
 export default initialState;

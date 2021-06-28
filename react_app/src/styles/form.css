@@ -30,4 +30,13 @@
 .change-form {
   text-align: center;
 }
+
+.create-textarea {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.folder {
+  margin-top: 30px;
+}
 /*# sourceMappingURL=form.css.map */

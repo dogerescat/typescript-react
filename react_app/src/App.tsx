@@ -3,6 +3,7 @@ import './styles/header.css';
 import './styles/form.css';
 import './styles/button.css';
 import './styles/index.css';
+import './styles/create.css';
 import FormHeader from './templates/Header';
 import Router from './Router';
 import { BottomNavi } from './components/Ukit';

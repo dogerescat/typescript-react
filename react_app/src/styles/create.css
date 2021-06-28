@@ -1,0 +1,19 @@
+.create-title {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.create-textarea {
+  width: 68%;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.create-button {
+  width: 15%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+/*# sourceMappingURL=create.css.map */

@@ -12,3 +12,13 @@ export const createMemo = (memoState: MemoState) => {
     },
   };
 };
+
+export const READ_MEMO = 'READ_MEMO';
+export const readMemo = (memoList: MemoState[]) => {
+  return {
+    type: 'READ_MEMO',
+    payload: {
+      memoList
+    }
+  }
+}

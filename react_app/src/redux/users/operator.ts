@@ -18,7 +18,6 @@ export const listenAuthState = () => {
                         name: data?.username,
                         uid: uid
                     }));
-                    // dispatch(push('/home'));
                 });
         })
     }

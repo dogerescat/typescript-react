@@ -9,7 +9,7 @@ export const UsersReducer = (
   switch (action.type) {
     case Actions.SIGN_IN:
       return {
-        ...state,
+        // ...state,
         ...action.payload,
       };
     case Actions.SIGN_OUT:

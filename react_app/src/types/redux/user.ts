@@ -1,23 +1,26 @@
+import { MemoList } from "./memo";
+
 export interface State {
-    users: UserState;
+  users: UserState;
+  memos: MemoList;
 }
 
 export interface UserState {
-    uid : string;
-    name: string;
-    isSignedIn: boolean;
+  uid: string;
+  name: string;
+  isSignedIn: boolean;
 }
 export interface UserAction {
-    type: string;
-    payload: {
-        isSignedIn: boolean;
-        uid: string;
-        name: string;
-        email: string;
-    }
-}
-export interface UserSignUp {
+  type: string;
+  payload: {
+    isSignedIn: boolean;
+    uid: string;
     name: string;
     email: string;
-    password: string;
+  };
+}
+export interface UserSignUp {
+  name: string;
+  email: string;
+  password: string;
 }

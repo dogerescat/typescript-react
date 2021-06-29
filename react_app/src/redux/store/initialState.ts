@@ -3,8 +3,9 @@ const initialState = {
     uid: '',
     name: '',
     isSignedIn: false,
-    screen: '',
   },
-  memos: [],
+  memos: {
+    memoList: []
+  },
 };
 export default initialState;

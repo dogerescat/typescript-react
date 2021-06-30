@@ -20,6 +20,15 @@ const Home = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: State) => state);
   const memoList = getMemoList(selector);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
   useEffect(() => {
     dispatch(readData());
   })
@@ -31,7 +40,7 @@ const Home = () => {
             <Grid container item xs={12} justify='center' spacing={5}>
               {memoList.map((value, index) => (
                 <Grid key={index} item>
-                  <FolderElement title={value.title} />
+                  <FolderElement title={value.title} content={value.content} />
                 </Grid>
               ))}
             </Grid>

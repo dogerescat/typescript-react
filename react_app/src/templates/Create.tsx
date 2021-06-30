@@ -42,6 +42,7 @@ const Create = () => {
           cols={100}
           value={memo}
           onChange={inputMemo}
+          style={{padding: 10}}
         />
       </div>
       <div className='create-button'>

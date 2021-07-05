@@ -33,15 +33,6 @@ interface Props {
 
 const MemoModal = (props: Props) => {
   const classes = useStyles();
-//   const [open, setOpen] = useState(false);
-// //   const handleOpen = () => {
-// //     setOpen(true);
-// //   };
-
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
-
   return (
     <>
       <Modal
@@ -53,7 +44,7 @@ const MemoModal = (props: Props) => {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 100,
         }}
       >
         <Fade in={props.isOpen}>

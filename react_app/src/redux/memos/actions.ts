@@ -18,7 +18,9 @@ export const readMemo = (memoList: MemoState[]) => {
   return {
     type: 'READ_MEMO',
     payload: {
-      memoList
+      memoList: memoList
     }
   }
 }
+
+

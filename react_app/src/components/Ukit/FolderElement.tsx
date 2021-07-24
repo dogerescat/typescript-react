@@ -1,12 +1,11 @@
-import React, {useCallback} from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
+import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { push } from 'connected-react-router';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -29,15 +28,12 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   title: string;
   content: string;
-  index: number;
+  uid: string;
+  handleOpen: (title: string, content: string) => void;
 }
 
 const FolderElement = (props: Props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const goMemo = useCallback((id) => {
-    dispatch(push('/open/'+id));
-  },[]);
   return (
       <Card className={classes.root}>
         <CardContent>
@@ -51,7 +47,9 @@ const FolderElement = (props: Props) => {
           <Typography variant='body2' component='p'>
           </Typography>
         </CardContent>
-          <Button onClick={() => goMemo(props.index)} size='small'>OPEN</Button>
+        <CardActions>
+          <Button onClick={() => props.handleOpen(props.title, props.content)} size='small'>OPEN</Button>
+        </CardActions>
       </Card>
   );
 };

@@ -49,7 +49,7 @@ const Create = () => {
         <PrimaryButton
           label='メモ'
           onClick={() => {
-            dispatch(saveMemo(memo, title));
+            dispatch(saveMemo(memo, title, ''));
           }}
         />
       </div>

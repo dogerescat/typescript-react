@@ -12,7 +12,8 @@ interface Data {
   userId: string; 
   createdAt?: FirebaseTs;
 }
-export const saveMemo = (memo: string, title: string) => {
+
+export const saveMemo = (memo: string, title: string, id: string) => {
   return async (dispatch: any, getState: any) => {
     const state = getState();
     const userId: string = state.users.uid
@@ -23,13 +24,15 @@ export const saveMemo = (memo: string, title: string) => {
       updatedAt: timestamp,
       userId: userId
     };
-    const ref = memoRef.doc();
-    const uid = ref.id;
-    data.uid = uid;
-    data.createdAt = timestamp;
+    if(id === '') {
+      const ref = memoRef.doc();
+      id = ref.id;
+      data.uid = id;
+      data.createdAt = timestamp;
+    }
     return memoRef
-      .doc(uid)
-      .set(data)
+      .doc(id)
+      .set(data, {merge: true})
       .then(() => {
         dispatch(readData());
         dispatch(push('/home'));

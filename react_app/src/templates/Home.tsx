@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../types/redux/user';
-// import { MemoState } from '../types/redux/memo';
 import { FolderElement, MemoModal } from '../components/Ukit';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { readData } from '../redux/memos/operations';
 import { getMemoList } from '../redux/memos/selectors';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

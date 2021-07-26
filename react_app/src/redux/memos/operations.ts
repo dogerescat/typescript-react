@@ -34,7 +34,6 @@ export const saveMemo = (memo: string, title: string, id: string) => {
       .doc(id)
       .set(data, {merge: true})
       .then(() => {
-        dispatch(readData());
         dispatch(push('/home'));
       })
       .catch((error) => {

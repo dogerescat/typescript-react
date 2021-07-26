@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
 import { db } from '../firebase';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { PrimaryButton, TextInput } from '../components/Ukit';
 import { saveMemo } from '../redux/memos/operations';
 
-const Edit = () => {
-    let id = window.location.pathname.split('/edit')[1];
+const Edit = (props: any) => {
+    let id = props.match.params.id;
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const dispatch = useDispatch();
-    if(id !== '') { 
-        id = id.split('/')[1];
+    if(!id) { 
+        dispatch(push('/home'));
     }
     const inputTitle = useCallback((event) => {
         setTitle(event.target.value);

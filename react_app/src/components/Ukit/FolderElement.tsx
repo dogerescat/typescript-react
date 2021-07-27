@@ -32,6 +32,8 @@ interface Props {
   content: string;
   uid: string;
   handleOpen: (title: string, content: string) => void;
+  deleteMemo: (index: number) => void;
+  index: number
 }
 
 const FolderElement = (props: Props) => {
@@ -53,6 +55,7 @@ const FolderElement = (props: Props) => {
         <CardActions>
           <Button onClick={() => props.handleOpen(props.title, props.content)} size='small'>Open</Button>
           <Button onClick={() => dispatch(push(`/edit/${props.uid}`))} >Edit</Button>
+          <Button onClick={() => props.deleteMemo(props.index)}>Delete</Button>
         </CardActions>
       </Card>
   );

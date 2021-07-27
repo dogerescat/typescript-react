@@ -1,8 +1,10 @@
-import { db, FirebaseTimestamp, FirebaseTs } from '../../firebase';
+import { db, FirebaseTimestamp} from '../../firebase';
 import { push } from 'connected-react-router';
 import { MemoState } from '../../types/redux/memo';
+import { FirebaseTs, FirebaseRf, FirebaseQs, FirebaseQds} from '../../types/firebase/index';
 import { readMemo } from './actions';
-const memoRef = db.collection('memos');
+import { Dispatch } from 'redux';
+const memoRef: FirebaseRf = db.collection('memos');
 
 interface Data {
   title: string;
@@ -14,7 +16,7 @@ interface Data {
 }
 
 export const saveMemo = (memo: string, title: string, id: string) => {
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch: Dispatch, getState: any) => {
     const state = getState();
     const userId: string = state.users.uid
     const timestamp = FirebaseTimestamp.now();
@@ -42,14 +44,26 @@ export const saveMemo = (memo: string, title: string, id: string) => {
   };
 };
 
+export const deleteData = (uid: string) => {
+  return async (dispatch: any, getState: any) => {
+    memoRef.doc(uid).delete()
+    .then(() => {
+      dispatch(readData());
+    })
+    .catch((error) => {
+      throw new Error(error);
+    })
+  }
+}
+
 export const readData = () => {
   return async (dispatch: any, getState: any) => {
     const state = getState();
     const userId = state.users.uid;
     const memoList: MemoState[] = [];
     memoRef.where('userId', '==', userId).get()
-      .then((snapshot) => {
-        snapshot.forEach((doc: any) => {
+      .then((snapshot: FirebaseQs) => {
+        snapshot.forEach((doc: FirebaseQds) => {
           const data = doc.data();
           const memo: MemoState = {
             title: data.title,

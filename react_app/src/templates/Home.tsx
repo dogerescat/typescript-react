@@ -4,7 +4,7 @@ import { State } from '../types/redux/user';
 import { FolderElement, MemoModal } from '../components/Ukit';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { readData } from '../redux/memos/operations';
+import { readData, deleteData } from '../redux/memos/operations';
 import { getMemoList } from '../redux/memos/selectors';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,6 +32,11 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  const deleteMemo = (index: number) => {
+    const uid = memoList.splice(index, 1)[0].uid;
+    dispatch(deleteData(uid));
+  }
   const handleOpen = (title: string, content: string) => {
     setTitle(title);
     setContent(content);
@@ -51,7 +56,7 @@ const Home = () => {
             <Grid container xl={12} justify='center' spacing={5}>
               {memoList.map((value, index) => (
                 <Grid key={index} item>
-                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content)} />
+                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content)} deleteMemo={() => deleteMemo(index)} index={index} />
                 </Grid>
               ))}
             </Grid>

@@ -12,7 +12,7 @@ const Edit = (props: any) => {
     const [content, setContent] = useState('');
     const dispatch = useDispatch();
     if(!id) { 
-        dispatch(push('/home'));
+        dispatch(push('/folder'));
     }
     const inputTitle = useCallback((event) => {
         setTitle(event.target.value);

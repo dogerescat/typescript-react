@@ -4,6 +4,7 @@ import { MemoState } from '../../types/redux/memo';
 import { FirebaseTs, FirebaseRf, FirebaseQs, FirebaseQds} from '../../types/firebase/index';
 import { readMemo } from './actions';
 import { Dispatch } from 'redux';
+
 const memoRef: FirebaseRf = db.collection('memos');
 
 interface Data {
@@ -36,7 +37,7 @@ export const saveMemo = (memo: string, title: string, id: string) => {
       .doc(id)
       .set(data, {merge: true})
       .then(() => {
-        dispatch(push('/home'));
+        dispatch(push('/folder'));
       })
       .catch((error) => {
         throw new Error(error);
@@ -45,7 +46,7 @@ export const saveMemo = (memo: string, title: string, id: string) => {
 };
 
 export const deleteData = (uid: string) => {
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch: any) => {
     memoRef.doc(uid).delete()
     .then(() => {
       dispatch(readData());

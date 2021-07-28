@@ -14,7 +14,7 @@ const FormHeader = () => {
   return (
     <header className='header'>
       <div className='header_wrapper'>
-        <div className='title'>React App</div>
+        <div className='title'>Memo Box</div>
         {Button}
       </div>
     </header>

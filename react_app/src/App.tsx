@@ -9,13 +9,15 @@ import Router from './Router';
 import { BottomNavi } from './components/Ukit';
 import {useSelector} from 'react-redux';
 import {State} from './types/redux/user';
-import {getIsSignedIn} from './redux/users/selectors';
+import {getIsSignedIn, getBottomNavi} from './redux/users/selectors';
+
 function App() {
   const selector = useSelector((state: State) => state);
   const isSignedIn = getIsSignedIn(selector);
+  const bottomNavi = getBottomNavi(selector);
   let Bottom: any;
   if(isSignedIn) {
-    Bottom = <BottomNavi/>;
+    Bottom = <BottomNavi value={bottomNavi} />;
   } 
   return (
     <>

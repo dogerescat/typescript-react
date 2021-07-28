@@ -10,13 +10,18 @@ export const listenAuthState = () => {
                 return;
             }
             const uid = user.uid;
+            let value = window.location.pathname.split('/')[1];
+            if(!value) {
+                value = 'folder';
+            }
             db.collection('users').doc(uid).get()
                 .then((snapshot) => {
                     const data = snapshot.data();
                     dispatch(signInAction({
                         isSignedIn: true,
                         name: data?.username,
-                        uid: uid
+                        uid: uid,
+                        bottomNavi: value
                     }));
                 });
         })
@@ -41,10 +46,11 @@ export const signIn = (email: string, password: string) => {
                     dispatch(signInAction({
                         isSignedIn: true,
                         name: data?.username,
-                        uid: uid
+                        uid: uid,
+                        bottomNavi: 'folder'
                     }))
                 })
-                dispatch(push('/home'));
+                dispatch(push('/folder'));
             }
         })
     }
@@ -74,7 +80,7 @@ export const signUp = (email: string, password: string, username: string, confir
                     }
                     db.collection('users').doc(uid).set(userInitialData)
                     .then(() => {
-                        dispatch(push('/home'))
+                        dispatch(push('/folder'))
                     })
                 }
             })

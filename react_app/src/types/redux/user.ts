@@ -9,6 +9,7 @@ export interface UserState {
   uid: string;
   name: string;
   isSignedIn: boolean;
+  bottomNavi: string;
 }
 export interface UserAction {
   type: string;

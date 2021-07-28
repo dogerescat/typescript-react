@@ -17,3 +17,8 @@ export const getIsSignedIn = createSelector(
   [userSelector],
   (state: UserState) => state.isSignedIn
 );
+
+export const getBottomNavi = createSelector(
+  [userSelector],
+  (state: UserState) => state.bottomNavi
+);

@@ -8,9 +8,13 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FolderIcon from '@material-ui/icons/Folder';
 import CreateIcon from '@material-ui/icons/Create';
 
-const BottomNavi = () => {
+interface Props {
+  value: string;
+}
+
+const BottomNavi = (props: Props) => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState('recents');
+  const [value, setValue] = useState(props.value);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
     switch (newValue) {
@@ -18,7 +22,7 @@ const BottomNavi = () => {
         dispatch(push('/create'));
         break;
       case 'folder':
-        dispatch(push('/home'));
+        dispatch(push('/folder'));
     }
   };
   return (

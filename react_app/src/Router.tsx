@@ -10,7 +10,7 @@ const Router: React.FC = () => {
             <Route exact path="(/)?" component={SignUp}/>
             <Route exact path="/login" component={Login}/>
             <Auth>
-                <Route exact path="/home" component={Home}/>
+                <Route exact path="/folder" component={Home}/>
                 <Route exact path="/create" component={Create}/>
                 <Route exact path="/edit/:id" component={Edit} />
             </Auth>

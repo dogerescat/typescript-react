@@ -7,6 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { push } from 'connected-react-router';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,12 +57,21 @@ const FolderElement = (props: Props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={() => props.handleOpen(props.title, props.content)} size='small'>Open</Button>
-          <Button onClick={() => dispatch(push(`/edit/${props.uid}`))} >Edit</Button>
-          <Button onClick={() => props.deleteMemo(props.index)}>Delete</Button>
+          <Button onClick={() => props.handleOpen(props.title, props.content)} size='small'>
+            <ImportContactsIcon/>
+          </Button>
+          <Button onClick={() => dispatch(push(`/edit/${props.uid}`))} >
+            <EditIcon/>
+          </Button>
+          <Button>
+            <FavoriteBorderIcon/>
+          </Button>
+          <Button onClick={() => props.deleteMemo(props.index)}>
+            <DeleteIcon/>
+          </Button>
         </CardActions>
       </Card>
   );
-};
+}
 
 export default FolderElement;

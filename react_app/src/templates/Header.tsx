@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { State } from '../types/redux/user';
+import { State } from '../redux/users/types';
 import { getIsSignedIn } from '../redux/users/selectors';
 import { Dropdown } from '../components/Ukit'
 

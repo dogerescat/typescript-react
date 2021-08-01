@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
-import { State } from '../../types/redux/user';
-import { MemoList } from '../../types/redux/memo';
+import { State } from '../users/types';
+import { MemoList } from './types';
 
 const memoSelector = (state: State) => state.memos;
 

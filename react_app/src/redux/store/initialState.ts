@@ -3,7 +3,8 @@ const initialState = {
     uid: '',
     name: '',
     isSignedIn: false,
-    bottomNavi: 'folder'
+    bottomNavi: 'folder',
+    isFavorite: false
   },
   memos: {
     memoList: []

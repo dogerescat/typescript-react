@@ -1,4 +1,4 @@
-import { MemoState } from '../../types/redux/memo';
+import { MemoState } from './types';
 
 export const CREATE_MEMO = 'CREATE_MEMO';
 
@@ -23,4 +23,23 @@ export const readMemo = (memoList: MemoState[]) => {
   }
 }
 
+export const DELETE_MEMO = 'DELETE_MEMO';
+export const deleteMemo = (memoList: MemoState[]) => {
+  return {
+    type: 'DELETE_MEMO',
+    payload: {
+      memoList: memoList
+    }
+  }
+}
+
+export const DELETE_MEMOS = 'DELETE_MEMOS';
+export const deleteMemos = () => {
+  return {
+    type: 'DELETE_MEMO',
+    payload: {
+      memoList: []
+    }
+  }
+}
 

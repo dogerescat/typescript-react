@@ -4,9 +4,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Select } from '@material-ui/core';
-import { signOut } from "../../redux/users/operator";
+import { signOut } from "../../redux/users/operations";
 import { getUserName } from '../../redux/users/selectors';
-import { State} from '../../types/redux/user';
+import { State} from '../../redux/users/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

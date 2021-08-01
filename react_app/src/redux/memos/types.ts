@@ -3,6 +3,7 @@ export interface MemoState {
   title: string;
   content: string;
   userId: string;
+  isFavorite: boolean;
 }
 export interface MemoList {
   memoList: MemoState[]

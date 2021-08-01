@@ -1,10 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../types/redux/user';
+import { State } from '../redux/users/types';
 import { FolderElement, MemoModal } from '../components/Ukit';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { readData, deleteData } from '../redux/memos/operations';
+import { readData, deleteData, switchMemoFavorite } from '../redux/memos/operations';
 import { getMemoList } from '../redux/memos/selectors';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,10 +32,18 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [memos, setMemos] = useState(memoList);
 
-  const deleteMemo = (index: number) => {
-    const uid = memoList.splice(index, 1)[0].uid;
-    dispatch(deleteData(uid));
+  const deleteMemo = (uid: string, index: number) => {
+    const newMemos = [...memos];
+    newMemos.splice(index, 1);
+    setMemos(newMemos);
+    dispatch(deleteData(uid, index));
+  }
+  const switchFavorite = (index: number) => {
+    const uid = memoList[index].uid;
+    memoList[index].isFavorite = !memoList[index].isFavorite;
+    dispatch(switchMemoFavorite(uid, memoList[index].isFavorite));
   }
   const handleOpen = (title: string, content: string) => {
     setTitle(title);
@@ -48,17 +56,22 @@ const Home = () => {
   useEffect(() => {
     dispatch(readData());
   }, [dispatch]);
+
+  useEffect(() => {
+    setMemos(memoList);
+  }, [memoList]);
+
   return (
     <>
       <div className='folder'>
         <Grid container className={classes.root} spacing={1}>
           <Grid item xs={12}>
             <Grid container xl={12} justify='center' spacing={5}>
-              {memoList.map((value, index) => (
-                <Grid key={index} item>
-                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content)} deleteMemo={() => deleteMemo(index)} index={index} />
+              {memos.length > 0 && (memos.map((value, index) => (
+                <Grid key={value.uid} item>
+                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content)} deleteMemo={() => deleteMemo(value.uid ,index)} index={index} isFavorite={value.isFavorite} switchFavorite ={() => switchFavorite(index)} />
                 </Grid>
-              ))}
+              )))}
             </Grid>
           </Grid>
         </Grid>

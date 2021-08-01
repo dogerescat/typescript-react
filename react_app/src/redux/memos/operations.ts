@@ -1,8 +1,8 @@
 import { db, FirebaseTimestamp} from '../../firebase';
 import { push } from 'connected-react-router';
-import { MemoState } from '../../types/redux/memo';
-import { FirebaseTs, FirebaseRf, FirebaseQs, FirebaseQds} from '../../types/firebase/index';
-import { readMemo } from './actions';
+import { MemoState } from './types';
+import { FirebaseTs, FirebaseRf, FirebaseQs, FirebaseQds} from '../../firebase/types';
+import { readMemo, deleteMemo } from './actions';
 import { Dispatch } from 'redux';
 
 const memoRef: FirebaseRf = db.collection('memos');
@@ -14,24 +14,27 @@ interface Data {
   uid?: string;
   userId: string; 
   createdAt?: FirebaseTs;
+  isFavorite?: boolean;
 }
 
 export const saveMemo = (memo: string, title: string, id: string) => {
   return async (dispatch: Dispatch, getState: any) => {
     const state = getState();
     const userId: string = state.users.uid
+    
     const timestamp = FirebaseTimestamp.now();
     const data: Data = {
       title: title,
       content: memo,
       updatedAt: timestamp,
-      userId: userId
+      userId: userId,
     };
     if(id === '') {
       const ref = memoRef.doc();
       id = ref.id;
       data.uid = id;
       data.createdAt = timestamp;
+      data.isFavorite = false;
     }
     return memoRef
       .doc(id)
@@ -45,8 +48,12 @@ export const saveMemo = (memo: string, title: string, id: string) => {
   };
 };
 
-export const deleteData = (uid: string) => {
-  return async (dispatch: any) => {
+export const deleteData = (uid: string, index: number) => {
+  return async (dispatch: any, getState: any) => {
+    const state = getState();
+    const memoList = state.memos.memoList;
+    memoList.splice(index, 1);
+    deleteMemo(memoList);
     memoRef.doc(uid).delete()
     .then(() => {
       dispatch(readData());
@@ -54,6 +61,18 @@ export const deleteData = (uid: string) => {
     .catch((error) => {
       throw new Error(error);
     })
+  }
+}
+
+export const switchMemoFavorite = (uid: string, isFavorite: boolean) => {
+  return async (dispatch: any) => {
+    memoRef.doc(uid).set({isFavorite: isFavorite}, {merge: true})
+      .then(() => {
+        dispatch(readData());
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
   }
 }
 
@@ -70,7 +89,8 @@ export const readData = () => {
             title: data.title,
             content: data.content,
             uid: data.uid,
-            userId: data.userId
+            userId: data.userId,
+            isFavorite: data.isFavorite
           };
           memoList.push(memo);
           dispatch(readMemo(memoList));

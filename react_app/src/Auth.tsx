@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIsSignedIn } from './redux/users/selectors';
-import { State } from './types/redux/user';
-import { listenAuthState } from './redux/users/operator';
+import { State } from './redux/users/types';
+import { listenAuthState } from './redux/users/operations';
 import { Login } from './templates/'
 
 const Auth = ({children}: any) => {

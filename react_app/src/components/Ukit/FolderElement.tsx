@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,13 +37,21 @@ interface Props {
   content: string;
   uid: string;
   handleOpen: (title: string, content: string) => void;
-  deleteMemo: (index: number) => void;
-  index: number
+  deleteMemo: (uid: string ,index: number) => void;
+  switchFavorite: (index: number) => void;
+  index: number;
+  isFavorite: boolean;
 }
 
 const FolderElement = (props: Props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  let favorite: any;
+  if(!props.isFavorite) {
+    favorite = <FavoriteBorderIcon />
+  } else {
+    favorite = <FavoriteIcon color='secondary' />
+  }
   return (
       <Card className={classes.root}>
         <CardContent>
@@ -63,10 +72,10 @@ const FolderElement = (props: Props) => {
           <Button onClick={() => dispatch(push(`/edit/${props.uid}`))} >
             <EditIcon/>
           </Button>
-          <Button>
-            <FavoriteBorderIcon/>
+          <Button onClick={() => props.switchFavorite(props.index)} >
+            {favorite}
           </Button>
-          <Button onClick={() => props.deleteMemo(props.index)}>
+          <Button onClick={() => props.deleteMemo(props.uid, props.index)}>
             <DeleteIcon/>
           </Button>
         </CardActions>

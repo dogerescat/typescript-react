@@ -1,7 +1,7 @@
 import { signInAction, signOutAction } from "./action";
 import { push } from "connected-react-router";
 import { auth, FirebaseTimestamp, db } from "../../firebase";
-
+import { deleteMemos } from '../memos/actions';
 export const listenAuthState = () => {
     return async (dispatch: any) => {
         return auth.onAuthStateChanged(user => {
@@ -21,7 +21,7 @@ export const listenAuthState = () => {
                         isSignedIn: true,
                         name: data?.username,
                         uid: uid,
-                        bottomNavi: value
+                        bottomNavi: value,
                     }));
                 });
         })
@@ -47,7 +47,7 @@ export const signIn = (email: string, password: string) => {
                         isSignedIn: true,
                         name: data?.username,
                         uid: uid,
-                        bottomNavi: 'folder'
+                        bottomNavi: 'folder',
                     }))
                 })
                 dispatch(push('/folder'));
@@ -88,11 +88,12 @@ export const signUp = (email: string, password: string, username: string, confir
 }
 
 export const signOut = () => {
-    return async (disptch: any) => {
+    return async (dispatch: any) => {
         auth.signOut()
           .then(() => {
-              disptch(signOutAction());
-              disptch(push('/'));
+              dispatch(signOutAction());
+              dispatch(deleteMemos());
+              dispatch(push('/'));
           })
     }
 }

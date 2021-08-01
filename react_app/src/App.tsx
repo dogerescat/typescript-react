@@ -8,7 +8,7 @@ import FormHeader from './templates/Header';
 import Router from './Router';
 import { BottomNavi } from './components/Ukit';
 import {useSelector} from 'react-redux';
-import {State} from './types/redux/user';
+import {State} from './redux/users/types';
 import {getIsSignedIn, getBottomNavi} from './redux/users/selectors';
 
 function App() {

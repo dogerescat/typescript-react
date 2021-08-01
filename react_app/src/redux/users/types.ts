@@ -1,4 +1,4 @@
-import { MemoList } from "./memo";
+import { MemoList } from "../memos/types";
 
 export interface State {
   users: UserState;

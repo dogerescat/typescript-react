@@ -1,4 +1,4 @@
-import { UserState } from '../../types/redux/user';
+import { UserState } from './types';
 
 export const SIGN_IN = 'SIGN_IN';
 

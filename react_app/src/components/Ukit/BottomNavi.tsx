@@ -23,6 +23,9 @@ const BottomNavi = (props: Props) => {
         break;
       case 'folder':
         dispatch(push('/folder'));
+        break;
+      case 'favorite':
+        dispatch(push('/favorite'));
     }
   };
   return (
@@ -33,8 +36,8 @@ const BottomNavi = (props: Props) => {
         icon={<RestoreIcon />}
       />
       <BottomNavigationAction
-        label='Favorites'
-        value='favorites'
+        label='Favorite'
+        value='favorite'
         icon={<FavoriteIcon />}
       />
       <BottomNavigationAction

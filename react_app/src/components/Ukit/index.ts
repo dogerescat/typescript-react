@@ -4,3 +4,4 @@ export { default as Dropdown } from './Dropdown';
 export { default as FolderElement } from './FolderElement';
 export { default as BottomNavi } from './BottomNavi';
 export { default as MemoModal} from './MemoModal';
+export { default as ImageArea} from './ImageArea';

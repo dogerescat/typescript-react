@@ -87,7 +87,7 @@ const Favorite = () => {
                     </Grid>
                   );
                 }
-                return <p></p>;
+                return <p key={value.uid}></p>;
               })}
             </Grid>
           </Grid>

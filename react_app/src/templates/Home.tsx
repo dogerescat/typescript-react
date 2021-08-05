@@ -6,6 +6,8 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { readData, deleteData, switchMemoFavorite } from '../redux/memos/operations';
 import { getMemoList } from '../redux/memos/selectors';
+import { getUserId } from '../redux/users/selectors';
+import { storage} from '../firebase/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,10 +31,12 @@ const Home = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: State) => state);
   const memoList = getMemoList(selector);
+  const userId = getUserId(selector);
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [memos, setMemos] = useState(memoList);
+  const [imageUrl, setImageUrl] = useState('');
 
   const deleteMemo = (uid: string, index: number) => {
     const newMemos = [...memos];
@@ -45,14 +49,25 @@ const Home = () => {
     memoList[index].isFavorite = !memoList[index].isFavorite;
     dispatch(switchMemoFavorite(uid, memoList[index].isFavorite));
   }
-  const handleOpen = (title: string, content: string) => {
+
+  const handleOpen = (title: string, content: string, imageId: string) => {
     setTitle(title);
     setContent(content);
+    if(imageUrl) {
+      const storageRf = storage.ref('images/'+ userId).child(imageId);
+      storageRf.getDownloadURL().then((url) => {
+        setImageUrl(url);
+      }).catch((error) => {
+        throw new Error(error);
+      })
+    }
     setOpen(true);
   }
+
   const handleClose = () => {
     setOpen(false);
   }
+
   useEffect(() => {
     dispatch(readData());
   }, [dispatch]);
@@ -69,14 +84,14 @@ const Home = () => {
             <Grid container xl={12} justify='center' spacing={5}>
               {memos.length > 0 && (memos.map((value, index) => (
                 <Grid key={value.uid} item>
-                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content)} deleteMemo={() => deleteMemo(value.uid ,index)} index={index} isFavorite={value.isFavorite} switchFavorite ={() => switchFavorite(index)} />
+                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content, value.imageId)} deleteMemo={() => deleteMemo(value.uid ,index)} index={index} isFavorite={value.isFavorite} switchFavorite ={() => switchFavorite(index)} />
                 </Grid>
               )))}
             </Grid>
           </Grid>
         </Grid>
       </div>
-      <MemoModal title={title} content={content} isOpen={open} handleClose={() => handleClose()} />
+      <MemoModal title={title} content={content} imageUrl={imageUrl}  isOpen={open} handleClose={() => handleClose()} />
     </>
   );
 };

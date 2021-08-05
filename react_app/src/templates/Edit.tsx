@@ -10,17 +10,20 @@ const Edit = (props: any) => {
     let id = props.match.params.id;
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [imageId, setImageId] = useState('');
     const dispatch = useDispatch();
+
     if(!id) { 
         dispatch(push('/folder'));
     }
+
     const inputTitle = useCallback((event) => {
         setTitle(event.target.value);
     },[setTitle]);
+
     const inputContent = useCallback((event) => {
         setContent(event.target.value);
     },[setContent]);
-
 
     useEffect(() => {
         if(id !== '') {
@@ -28,9 +31,11 @@ const Edit = (props: any) => {
                 const memo = snapshot.data();
                 setTitle(memo.title);
                 setContent(memo.content);
+                setImageId(memo.imageId);
             });
         }
     },[id]);
+
     return (
         <>
         <div className='create-title'>
@@ -60,12 +65,11 @@ const Edit = (props: any) => {
         <PrimaryButton
           label='編集'
           onClick={() => {
-            dispatch(saveMemo(content, title, id));
+            dispatch(saveMemo(content, title, id, imageId));
           }}
         />
       </div>
-
-        </>
+      </>
     )
 }
 

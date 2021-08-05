@@ -28,6 +28,7 @@ interface Props {
     title: string;
     content: string;
     isOpen: boolean;
+    imageUrl: string;
     handleClose: () => void;
 }
 
@@ -53,6 +54,9 @@ const MemoModal = (props: Props) => {
             <p id='transition-modal-description'>
               {props.content}
             </p>
+            <div>
+              <img src={props.imageUrl} alt="" />
+            </div>
           </div>
         </Fade>
       </Modal>

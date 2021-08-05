@@ -4,6 +4,7 @@ export interface MemoState {
   content: string;
   userId: string;
   isFavorite: boolean;
+  imageId: string;
 }
 export interface MemoList {
   memoList: MemoState[]

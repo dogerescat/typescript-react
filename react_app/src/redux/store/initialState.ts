@@ -4,7 +4,8 @@ const initialState = {
     name: '',
     isSignedIn: false,
     bottomNavi: 'folder',
-    isFavorite: false
+    isFavorite: false,
+    imageId: ''
   },
   memos: {
     memoList: []

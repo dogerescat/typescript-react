@@ -10,6 +10,8 @@ import {
   switchMemoFavorite,
 } from '../redux/memos/operations';
 import { getMemoList } from '../redux/memos/selectors';
+import { getUserId } from '../redux/users/selectors';
+import { storage } from '../firebase/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,24 +34,41 @@ const Favorite = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: State) => state);
   const memoList = getMemoList(selector);
+  const userId = getUserId(selector);
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [memos, setMemos] = useState(memoList);
+  const [imageUrl, setImageUrl] = useState('');
+
   const deleteMemo = (uid: string, index: number) => {
     const newMemos = [...memos];
     newMemos.splice(index, 1);
     setMemos(newMemos);
     dispatch(deleteData(uid, index));
   };
+
   const switchFavorite = (index: number) => {
     const uid = memoList[index].uid;
     memoList[index].isFavorite = !memoList[index].isFavorite;
     dispatch(switchMemoFavorite(uid, memoList[index].isFavorite));
   };
-  const handleOpen = (title: string, content: string) => {
+
+  const handleOpen = (title: string, content: string, imageId: string) => {
     setTitle(title);
     setContent(content);
+    if(imageId) {
+      const storageRf = storage.ref('images/' + userId).child(imageId);
+      storageRf
+        .getDownloadURL()
+        .then((url) => {
+          setImageUrl(url);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    }
+
     setOpen(true);
   };
   const handleClose = () => {
@@ -77,7 +96,7 @@ const Favorite = () => {
                         content={value.content}
                         uid={value.uid}
                         handleOpen={() =>
-                          handleOpen(value.title, value.content)
+                          handleOpen(value.title, value.content, value.imageId)
                         }
                         deleteMemo={() => deleteMemo(value.uid, index)}
                         index={index}
@@ -98,6 +117,7 @@ const Favorite = () => {
         content={content}
         isOpen={open}
         handleClose={() => handleClose()}
+        imageUrl={imageUrl}
       />
     </>
   );

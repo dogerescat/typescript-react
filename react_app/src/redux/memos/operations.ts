@@ -15,19 +15,20 @@ interface Data {
   userId: string; 
   createdAt?: FirebaseTs;
   isFavorite?: boolean;
+  imageId?: string;
 }
 
-export const saveMemo = (memo: string, title: string, id: string) => {
+export const saveMemo = (memo: string, title: string, id: string, imageId: string) => {
   return async (dispatch: Dispatch, getState: any) => {
     const state = getState();
     const userId: string = state.users.uid
-    
     const timestamp = FirebaseTimestamp.now();
     const data: Data = {
       title: title,
       content: memo,
       updatedAt: timestamp,
       userId: userId,
+      imageId: imageId
     };
     if(id === '') {
       const ref = memoRef.doc();
@@ -90,7 +91,8 @@ export const readData = () => {
             content: data.content,
             uid: data.uid,
             userId: data.userId,
-            isFavorite: data.isFavorite
+            isFavorite: data.isFavorite,
+            imageId: data.imageId
           };
           memoList.push(memo);
           dispatch(readMemo(memoList));

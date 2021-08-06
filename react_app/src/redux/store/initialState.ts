@@ -3,7 +3,6 @@ const initialState = {
     uid: '',
     name: '',
     isSignedIn: false,
-    bottomNavi: 'folder',
     isFavorite: false,
     imageId: ''
   },

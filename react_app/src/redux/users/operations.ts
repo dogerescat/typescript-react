@@ -21,7 +21,6 @@ export const listenAuthState = () => {
                         isSignedIn: true,
                         name: data?.username,
                         uid: uid,
-                        bottomNavi: value,
                     }));
                 });
         })
@@ -47,7 +46,6 @@ export const signIn = (email: string, password: string) => {
                         isSignedIn: true,
                         name: data?.username,
                         uid: uid,
-                        bottomNavi: 'folder',
                     }))
                 })
                 dispatch(push('/folder'));

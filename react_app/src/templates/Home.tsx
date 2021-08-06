@@ -53,7 +53,7 @@ const Home = () => {
   const handleOpen = (title: string, content: string, imageId: string) => {
     setTitle(title);
     setContent(content);
-    if(imageUrl) {
+    if(imageId) {
       const storageRf = storage.ref('images/'+ userId).child(imageId);
       storageRf.getDownloadURL().then((url) => {
         setImageUrl(url);

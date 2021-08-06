@@ -18,7 +18,3 @@ export const getIsSignedIn = createSelector(
   (state: UserState) => state.isSignedIn
 );
 
-export const getBottomNavi = createSelector(
-  [userSelector],
-  (state: UserState) => state.bottomNavi
-);

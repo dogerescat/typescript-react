@@ -9,7 +9,6 @@ export const signInAction = (userState: UserState) => {
       isSignedIn: true,
       uid: userState.uid,
       name: userState.name,
-      bottomNavi: userState.bottomNavi
     },
   };
 };
@@ -22,7 +21,6 @@ export const signUpAction = (userState: UserState) => {
       isSignedIn: false,
       uid: userState.uid,
       name: userState.name,
-      bottomNavi: userState.bottomNavi
     },
   };
 };

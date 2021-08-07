@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../redux/users/types';
 import { FolderElement, MemoModal } from '../components/Ukit';
@@ -38,19 +38,20 @@ const Home = () => {
   const [memos, setMemos] = useState(memoList);
   const [imageUrl, setImageUrl] = useState('');
 
-  const deleteMemo = (uid: string, index: number) => {
+  const deleteMemo = useCallback( (uid: string, index: number) => {
     const newMemos = [...memos];
     newMemos.splice(index, 1);
     setMemos(newMemos);
     dispatch(deleteData(uid, index));
-  }
-  const switchFavorite = (index: number) => {
+  },[dispatch,memos]);
+
+  const switchFavorite = useCallback((index: number) => {
     const uid = memoList[index].uid;
     memoList[index].isFavorite = !memoList[index].isFavorite;
     dispatch(switchMemoFavorite(uid, memoList[index].isFavorite));
-  }
+  },[memoList, dispatch]);
 
-  const handleOpen = (title: string, content: string, imageId: string) => {
+  const handleOpen = useCallback((title: string, content: string, imageId: string) => {
     setTitle(title);
     setContent(content);
     if(imageId) {
@@ -62,11 +63,12 @@ const Home = () => {
       })
     }
     setOpen(true);
-  }
+  }, [userId]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
-  }
+    setImageUrl('');
+  }, [setOpen])
 
   useEffect(() => {
     dispatch(readData());
@@ -84,7 +86,7 @@ const Home = () => {
             <Grid container xl={12} justify='center' spacing={5}>
               {memos.length > 0 && (memos.map((value, index) => (
                 <Grid key={value.uid} item>
-                  <FolderElement title={value.title} content={value.content} uid={value.uid} handleOpen={() => handleOpen(value.title, value.content, value.imageId)} deleteMemo={() => deleteMemo(value.uid ,index)} index={index} isFavorite={value.isFavorite} switchFavorite ={() => switchFavorite(index)} />
+                  <FolderElement title={value.title} content={value.content} uid={value.uid} imageId={value.imageId} handleOpen={handleOpen} deleteMemo={deleteMemo} index={index} isFavorite={value.isFavorite} switchFavorite ={switchFavorite} />
                 </Grid>
               )))}
             </Grid>

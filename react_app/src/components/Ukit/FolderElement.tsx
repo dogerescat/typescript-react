@@ -36,11 +36,12 @@ interface Props {
   title: string;
   content: string;
   uid: string;
-  handleOpen: (title: string, content: string) => void;
+  handleOpen: (title: string, content: string, imageId: string) => void;
   deleteMemo: (uid: string ,index: number) => void;
   switchFavorite: (index: number) => void;
   index: number;
   isFavorite: boolean;
+  imageId: string;
 }
 
 const FolderElement = (props: Props) => {
@@ -66,7 +67,7 @@ const FolderElement = (props: Props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={() => props.handleOpen(props.title, props.content)} size='small'>
+          <Button onClick={() => props.handleOpen(props.title, props.content, props.imageId)} size='small'>
             <ImportContactsIcon/>
           </Button>
           <Button onClick={() => dispatch(push(`/edit/${props.uid}`))} >

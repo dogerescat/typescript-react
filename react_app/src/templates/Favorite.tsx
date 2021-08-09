@@ -50,8 +50,7 @@ const Favorite = () => {
   
   const switchFavorite = useCallback((index: number) => {
     const uid = memoList[index].uid;
-    memoList[index].isFavorite = !memoList[index].isFavorite;
-    dispatch(switchMemoFavorite(uid, memoList[index].isFavorite));
+    dispatch(switchMemoFavorite(uid, memoList[index].isFavorite, index));
   },[memoList, dispatch]);
 
   const handleOpen = useCallback((title: string, content: string, imageId: string) => {

@@ -1,9 +1,10 @@
 import { signInAction, signOutAction } from "./action";
+import { Dispatch } from "redux";
 import { push } from "connected-react-router";
 import { auth, FirebaseTimestamp, db } from "../../firebase";
 import { deleteMemos } from '../memos/actions';
 export const listenAuthState = () => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch) => {
         return auth.onAuthStateChanged(user => {
             if(!user) {
                 dispatch(push('/login'));
@@ -28,7 +29,7 @@ export const listenAuthState = () => {
 }
 
 export const signIn = (email: string, password: string) => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch) => {
             if(email === "" || password === "") {
                 alert("必須入力です");
                 return false;
@@ -55,7 +56,7 @@ export const signIn = (email: string, password: string) => {
 }
 
 export const signUp = (email: string, password: string, username: string, confirm: string) => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch) => {
         if(username === "" || email === "" || password === "" || confirm === "") {
             alert('必須入力です');
             return false;
@@ -86,7 +87,7 @@ export const signUp = (email: string, password: string, username: string, confir
 }
 
 export const signOut = () => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch) => {
         auth.signOut()
           .then(() => {
               dispatch(signOutAction());

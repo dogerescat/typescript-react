@@ -23,6 +23,16 @@ export const readMemo = (memoList: MemoState[]) => {
   }
 }
 
+export const SWITCH_FAVORITE = 'SWITCH_FAVORITE';
+export const switchFavorite = (memoList: MemoState[]) => {
+  return {
+    type: 'SWITCH_FAVORITE',
+    payload: {
+      memoList: memoList
+    }
+  }
+}
+
 export const DELETE_MEMO = 'DELETE_MEMO';
 export const deleteMemo = (memoList: MemoState[]) => {
   return {

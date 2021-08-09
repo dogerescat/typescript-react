@@ -4,10 +4,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import createStore from './redux/store/store';
+import {State} from './redux/users/types'
 import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
 
-const history = History.createBrowserHistory();
+const history: History.History<State> = History.createBrowserHistory();
 export const store = createStore(history);
 
 ReactDOM.render(

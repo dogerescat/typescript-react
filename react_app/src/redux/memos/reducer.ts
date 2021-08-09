@@ -17,6 +17,11 @@ export const MemoReducer = (
         ...state,
         ...action.payload
       }
+    case Actions.SWITCH_FAVORITE:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

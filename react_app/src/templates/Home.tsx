@@ -47,7 +47,7 @@ const Home = () => {
 
   const switchFavorite = useCallback((index: number) => {
     const uid = memoList[index].uid;
-    dispatch(switchMemoFavorite(uid, memoList[index].isFavorite, index));
+    dispatch(switchMemoFavorite(uid, index));
   },[memoList, dispatch]);
 
   const handleOpen = useCallback((title: string, content: string, imageId: string) => {

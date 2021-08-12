@@ -69,12 +69,12 @@ export const deleteData = (uid: string, index: number) => {
   }
 }
 
-export const switchMemoFavorite = (uid: string, isFavorite: boolean, index: number) => {
+export const switchMemoFavorite = (uid: string, index: number) => {
   return async (dispatch: Dispatch, getState: () => State) => {
     const state = getState();
     const memoList = state.memos.memoList;
     memoList[index].isFavorite = !memoList[index].isFavorite;
-    memoRef.doc(uid).set({isFavorite: isFavorite}, {merge: true})
+    memoRef.doc(uid).set({isFavorite: memoList[index].isFavorite}, {merge: true})
       .then(() => {
         dispatch(switchFavorite(memoList));
       })

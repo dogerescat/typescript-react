@@ -2,12 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { db, storage } from '../firebase';
+import { FirebaseDocSnapshotData} from '../firebase/types';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { PrimaryButton, TextInput, ImageArea } from '../components/Ukit';
 import { saveMemo } from '../redux/memos/operations';
 import { getUserId } from '../redux/users/selectors';
 import { State } from '../redux/users/types';
-
 interface Image {
   id: string;
   path: string;
@@ -49,20 +49,19 @@ const Edit = (props: any) => {
   
     useEffect(() => {
         if(uid !== '') {
-            db.collection('memos').doc(uid).get().then((snapshot: any) => {
+            db.collection('memos').doc(uid).get().then((snapshot: FirebaseDocSnapshotData) => {
                 const memo = snapshot.data();
-                setTitle(memo.title);
-                setContent(memo.content);
-                setImageId(memo.imageId);
-                if(memo.imageId !== '') {
-                  const storageRf = storage.ref('images/'+ userId).child(memo.imageId);
+                setTitle(memo?.title);
+                setContent(memo?.content);
+                setImageId(memo?.imageId);
+                if(memo?.imageId !== '') {
+                  const storageRf = storage.ref('images/'+ userId).child(memo?.imageId);
                   storageRf.getDownloadURL().then((url) => {
-                    const newImage = {id: memo.imageId, path: url}
+                    const newImage = {id: memo?.imageId, path: url}
                     setImage(newImage);
                   }).catch((error) => {
                     throw new Error(error);
                   })
-
                 }
             });
         }

@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import HTMLReactParser from 'html-react-parser';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +24,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const returnCodeToBr = (text: string) => {
+  if(text === "") {
+    return text;
+  }
+  let j = 50;
+  while(j < text.length) {
+    text = text.slice(0, j) + '\n' + text.slice(j);
+    j += 50;
+  }
+  return HTMLReactParser(text.replace(/\r?\n/g, '<br/>'));
+}
 
 interface Props {
     title: string;
@@ -52,7 +65,7 @@ const MemoModal = (props: Props) => {
           <div className={classes.paper}>
             <h2 id='transition-modal-title'>{props.title}</h2>
             <p id='transition-modal-description'>
-              {props.content}
+              {returnCodeToBr(props.content)}
             </p>
             <div>
               <img src={props.imageUrl} alt="" />

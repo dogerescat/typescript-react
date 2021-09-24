@@ -29,7 +29,27 @@ const Create = () => {
   
   const inputMemo = useCallback(
     (event) => {
-      setMemo(event.target.value);
+      let text = event.target.value;
+      let count = 0;
+      for(let i = 0; i < text.length; i++) {
+        if(text[i] === '\n') {
+          ++count;
+        }
+      }
+      if(count > 10) {
+        window.alert('10行以上のメモはできません')
+      }
+      let charCheck = 0;
+      for(let i = 0; i < text.length; i++) {
+        if(!text.match(/^[\x20-\x7e]*$/)) {
+          ++charCheck;
+        }
+      }
+      if(text.length + charCheck/2 > 500) {
+        window.alert(`${500 - charCheck/2}文字以上のメモはできません`)
+        text = text.slice(0, 499 - charCheck/2);
+      }
+      setMemo(text);
     },
     [setMemo]
   );
@@ -80,9 +100,8 @@ const Create = () => {
       <div className='create-textarea'>
         <TextareaAutosize
           aria-label='minimum height'
-          rowsMin={15}
           rows={8}
-          cols={100}
+          cols={70}
           value={memo}
           onChange={inputMemo}
           style={{padding: 10}}

@@ -12,15 +12,15 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       minWidth: 500,
-      minHeight: 500
+      minHeight: 600
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
-      border: '1px solid #000',
+      border: '0.5px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
       width: 500,
-      height: 500
+      height: 600
     },
   })
 );
@@ -67,7 +67,7 @@ const MemoModal = (props: Props) => {
             <p id='transition-modal-description'>
               {returnCodeToBr(props.content)}
             </p>
-            <div>
+            <div style= {{textAlign: 'center', marginTop: '30px'}}>
               <img src={props.imageUrl} alt="" />
             </div>
           </div>

@@ -17,7 +17,7 @@ const ImageArea = (props: Props) => {
             <DeleteIcon />
         </Button>
       </div>
-      <p className='preview-image-comment'>画像は複数添付できません</p>
+      <p className='preview-image-comment'>※ 画像は複数添付できません</p>
     </>
   );
 };

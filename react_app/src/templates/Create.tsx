@@ -81,6 +81,15 @@ const Create = () => {
   let previewImage: any;
   if(image.id) {
     previewImage = <ImageArea id={image.id} path={image.path} deleteImage={() => deleteImage(image.id)} />;
+  } else {
+    previewImage = (
+      <>
+        <label>
+          <p className="image-text">画像をアップロードする</p>
+          <input className="input-none" type="file" onChange={(event) => uploadImage(event)}/>
+        </label>
+      </>
+    )
   }
   
   return (
@@ -115,10 +124,7 @@ const Create = () => {
           }}
         />
       </div>
-      <label>
-        <p className="image-text">画像をアップロードする</p>
-        <input className="input-none" type="file" onChange={(event) => uploadImage(event)}/>
-      </label>
+      
       {previewImage}
     </>
   );

@@ -19,7 +19,6 @@ const Edit = (props: any) => {
     const userId = getUserId(selector);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [imageId, setImageId] = useState('');
     const dispatch = useDispatch();
     const [image, setImage] = useState<Image>({id: '', path: ''});
 
@@ -35,6 +34,23 @@ const Edit = (props: any) => {
         setContent(event.target.value);
     },[setContent]);
 
+    const uploadImage = useCallback((event: any) => {
+      const memoRef = db.collection('memos').doc();
+      const id = memoRef.id;
+      console.log("id id");
+      console.log(id);
+      const file = event.target.files;
+      let blob = new Blob(file, {type: "image/jpeg"});
+      const uploadRef = storage.ref('images/'+ userId).child(id);
+      const uploadTask = uploadRef.put(blob);
+      uploadTask.then(() => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
+          const newImage = {id: id, path: downloadUrl};
+          setImage(newImage)
+        })
+      })
+    },[setImage, userId]);
+  
     const deleteImage = useCallback(async(id) => {
       const ret = window.confirm('really?');
       if(!ret) {
@@ -53,7 +69,7 @@ const Edit = (props: any) => {
                 const memo = snapshot.data();
                 setTitle(memo?.title);
                 setContent(memo?.content);
-                setImageId(memo?.imageId);
+                setImage({id: memo?.imageId, path: ''});
                 if(memo?.imageId !== '') {
                   const storageRf = storage.ref('images/'+ userId).child(memo?.imageId);
                   storageRf.getDownloadURL().then((url) => {
@@ -69,6 +85,15 @@ const Edit = (props: any) => {
     let previewImage: any;
     if(image.id) {
       previewImage = <ImageArea id={image.id} path={image.path} deleteImage={() => deleteImage(image.id)} />
+    } else {
+      previewImage = (
+        <>
+          <label >
+            <p className="image-text">画像をアップロードする</p>
+            <input className="input-none" type="file" onChange={(event) => uploadImage(event)}/>
+          </label>
+        </>
+      )
     }
     return (
         <>
@@ -99,7 +124,7 @@ const Edit = (props: any) => {
         <PrimaryButton
           label='編集'
           onClick={() => {
-            dispatch(saveMemo(content, title, uid, imageId));
+            dispatch(saveMemo(content, title, uid, image.id));
           }}
         />
       </div>

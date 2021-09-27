@@ -40,14 +40,18 @@ const Create = () => {
         window.alert('10行以上のメモはできません')
       }
       let charCheck = 0;
+      let chapCnt = 0;
       for(let i = 0; i < text.length; i++) {
         if(!text.match(/^[\x20-\x7e]*$/)) {
-          ++charCheck;
+          charCheck += 1.1;
+          chapCnt++;
+        } else {
+          charCheck++;
         }
       }
-      if(text.length + charCheck/2 > 500) {
-        window.alert(`${500 - charCheck/2}文字以上のメモはできません`)
-        text = text.slice(0, 499 - charCheck/2);
+      if(charCheck > 500) {
+        window.alert(`半角文字${500}文字以上のメモはできません`);
+        text = text.slice(0,  500 - chapCnt/10);
       }
       setMemo(text);
     },

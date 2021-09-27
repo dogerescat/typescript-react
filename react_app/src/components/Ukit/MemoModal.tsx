@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       minWidth: 500,
-      minHeight: 600
+      minHeight: 650
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
       width: 500,
-      height: 600
+      height: 650
     },
   })
 );
@@ -29,10 +29,14 @@ const returnCodeToBr = (text: string) => {
   if(text === "") {
     return text;
   }
-  let j = 50;
+  let j = 0;
   while(j < text.length) {
-    text = text.slice(0, j) + '\n' + text.slice(j);
-    j += 50;
+    if(!text.match(/^[\x20-\x7e]*$/)) {
+      j += 1.1;
+    } else {
+      j++;
+    }
+    if(j % 50 === 0) text = text.slice(0, j) + '\n' + text.slice(j);
   }
   return HTMLReactParser(text.replace(/\r?\n/g, '<br/>'));
 }

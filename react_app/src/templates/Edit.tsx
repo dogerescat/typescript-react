@@ -31,7 +31,31 @@ const Edit = (props: any) => {
     },[setTitle]);
 
     const inputContent = useCallback((event) => {
-        setContent(event.target.value);
+      let text = event.target.value;
+      let count = 0;
+      for(let i = 0; i < text.length; i++) {
+        if(text[i] === '\n') {
+          ++count;
+        }
+      }
+      if(count > 10) {
+        window.alert('10行以上のメモはできません')
+      }
+      let charCheck = 0;
+      let chapCnt = 0;
+      for(let i = 0; i < text.length; i++) {
+        if(!text.match(/^[\x20-\x7e]*$/)) {
+          charCheck += 1.1;
+          chapCnt++;
+        } else {
+          charCheck++;
+        }
+      }
+      if(charCheck > 500) {
+        window.alert(`半角文字500文字以上のメモはできません`);
+        text = text.slice(0,  500 - chapCnt/10);
+      }
+      setContent(text);
     },[setContent]);
 
     const uploadImage = useCallback((event: any) => {
